@@ -1,4 +1,5 @@
 import InputField from "./InputField";
+import TipPercentage from "./TipPercentage";
 import TipResults from "./TipResults";
 
 
@@ -13,29 +14,14 @@ export default function TipCalculator() {
                 <legend className="clr-label"> Select Tip % </legend>
 
                 <ul className="tip-calculator__tip-percentages" role="listbox"> 
-                  <li role="option">
-                    <label htmlFor="tip-1"> 5% </label>
-                    <input type="radio" name="tip-percentage" id="tip-1" />
-                  </li>
+                  <li role="option"> <TipPercentage percentage={"5%"}/> </li>
+                  <li role="option"> <TipPercentage percentage={"10%"}/> </li>
+                  <li role="option"> <TipPercentage percentage={"15%"}/> </li>
+                  <li role="option"> <TipPercentage percentage={"25%"}/> </li>
+                  <li role="option"> <TipPercentage percentage={"50%"}/> </li>
 
-                  <li role="option">
-                    <label htmlFor="tip-2"> 10% </label>
-                    <input type="radio" name="tip-percentage" id="tip-2" />
-                  </li>
-
-                  <li role="option">
-                    <label htmlFor="tip-3"> 15% </label>
-                    <input type="radio" name="tip-percentage" id="tip-3" />
-                  </li>
-
-                  <li role="option">
-                    <label htmlFor="tip-4"> 20% </label>
-                    <input type="radio" name="tip-percentage" id="tip-4" />
-                  </li>
-
-                  <li role="option">
-                    <label htmlFor="tip-5"> 50% </label>
-                    <input type="radio" name="tip-percentage" id="tip-5" />
+                  <li data-custom-tip role="option">
+                    <input type="number" name="tip-percentage" placeholder="Custom" />
                   </li>
                 </ul>
               </fieldset>
