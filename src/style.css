@@ -81,12 +81,13 @@ select {
     --clr-primary-400: hsl(172, 67%, 45%);
 
     --clr-neutral-600: hsl(183, 100%, 15%);
+    --clr-neutral-550: hsl(183, 79%, 24%);
     --clr-neutral-500: hsl(186, 14%, 43%);
     --clr-neutral-400: hsl(184, 14%, 56%);
     --clr-neutral-300: hsl(185, 41%, 84%);
     --clr-neutral-200: hsl(189, 41%, 97%);
     --clr-neutral-100: hsl(0, 0%, 100%);
-
+    
     --fs-400: 2rem;    /* 32px */
     --fs-300: 1.5rem;  /* 24px */
     --fs-200: 1rem;    /* 16px */
@@ -105,6 +106,9 @@ select {
 .clr-error { color: var(--clr-primary-500); }
 
 
+.clr-accent { color: var(--clr-primary-400); }
+
+
 .clr-dark-cyan { color: var(--clr-neutral-600); }
 
 
@@ -114,7 +118,13 @@ select {
 .clr-label { color: var(--clr-neutral-500); }
 
 
+.bg-accent { background-color: var(--clr-primary-400); }
+
+
 .bg-white { background-color: var(--clr-neutral-100); }
+
+
+.bg-dark-cyan { background-color: var(--clr-neutral-600); }
 
 
 .fs-small { font-size: var(--fs-100); }
@@ -127,6 +137,12 @@ select {
 
 
 .fs-xl { font-size: var(--fs-400); }
+
+
+.flex { display: flex; gap: var(--gap, 1rem) }
+
+
+.even-columns { display: grid; grid-template-columns: repeat(var(--column-count, 2), 1fr); }
 
 
 /* general */
@@ -143,6 +159,17 @@ body {
     justify-items: center;
     width: min(90%, 56.25rem);
     margin-inline: auto;
+}
+
+
+form {
+    display: grid;
+    grid-template-columns: repeat(var(--column-count, 1), 1fr);
+    align-items: center;
+
+    @media (width >= 40em) {
+        --column-count: 2;
+    }
 }
 
 
@@ -248,3 +275,36 @@ body {
 }
 
 
+.tip-results {
+    display: grid;
+    row-gap: clamp(2rem, 2vw, 8.313rem);
+    border-radius: 15px;
+    padding: 2.313rem 1.5rem;
+}
+
+
+.tip-results__sums li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & h2::after {
+        content: "/ person";
+        display: block;
+        font-size: var(--fs-100);
+        color: var(--clr-neutral-400);
+    }
+}
+
+
+.tip-results__reset {
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    &:disabled {
+        color: var(--clr-neutral-600);
+        background-color: var(--clr-neutral-550);
+    }
+}
