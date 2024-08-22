@@ -6,7 +6,7 @@ import TipResults from "./TipResults";
 export default function TipCalculator() {
   return (
     <div className="tip-calculator bg-white">
-        <form>
+        <form className="grid">
             <div className="tip-calculator__input-part"> 
               <InputField labelText={"Bill"} inputType={"dollar"}/>
 

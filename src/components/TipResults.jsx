@@ -3,7 +3,7 @@
 export default function TipResults() {
   return (
     <div className="tip-results bg-dark-cyan clr-white">
-      <ul className="tip-results__sums" role="list">
+      <ul className="tip-results__sums grid" role="list">
         <li>
           <h2> Tip Amount </h2>
           <span className="clr-accent fs-xl"> 0.00$ </span>
