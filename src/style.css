@@ -95,7 +95,7 @@ select {
 
     --ff-primary: "Space Mono", monospace;
 
-    @media (width >= 20em) {
+    @media (width >= 40em) {
         --fs-400: 3rem;
     }
 }
@@ -142,6 +142,9 @@ select {
 .flex { display: flex; gap: var(--gap, 1rem) }
 
 
+.grid { display: grid; gap: var(--_gap, 1rem)}
+
+
 .even-columns { display: grid; grid-template-columns: repeat(var(--column-count, 2), 1fr); }
 
 
@@ -162,13 +165,74 @@ body {
 }
 
 
-form {
+.container-grid {
+    --_container-padding-inline: 2rem; 
+    --_container-max-width: 110ch;
+    --_breakout-max-width: 120ch;
+    --_breakout-size: calc((var(--_breakout-max-width) - var(--_container-max-width)) / 2);
+
     display: grid;
+    grid-template-columns: 
+    [full-width-start] minmax(var(--_container-padding-inline), 1fr)
+    [breakout-start]   minmax(0, var(--_breakout-size)) 
+    [content-start]    min(100% - (var(--_container-padding-inline) * 2), var(--_container-max-width)) 
+    [content-end]      minmax(0, var(--_breakout-size)) 
+    [breakout-end]     minmax(var(--_container-padding-inline), 1fr)
+    [full-width-end];
+    row-gap: var(--_row-gap, 2.5rem);
+    justify-items: center;
+    height: 100%;
+
+    & > * {
+        grid-column: content;
+    }
+
+    @media (width >= 40rem) {
+        align-content: center;
+        --_row-gap: 5.438rem;
+    }
+}
+
+
+.full-width {
+    grid-column: full-width;
+}
+
+
+.breakout {
+    grid-column: breakout;
+}
+
+
+.logo {
+    margin-top: 3.125rem; 
+
+    @media (width >= 40rem) {
+        margin-top: 0;
+    }
+}
+
+
+form {
+    --_gap: var(--_row-gap, 2rem);
     grid-template-columns: repeat(var(--column-count, 1), 1fr);
     align-items: center;
 
+    & > * {
+        display: grid;
+        row-gap: var(--_gap);
+    }
+
+    
+    & fieldset {
+        display: grid;
+        row-gap: 1rem;
+    }
+
+
     @media (width >= 40em) {
         --column-count: 2;
+        --_row-gap: 2.5rem;
     }
 }
 
@@ -177,12 +241,18 @@ form {
     display: flex;
     background-color: var(--clr-neutral-200);
     padding: 0.375rem 0.75rem;
+    border-radius: 5px;
 
     & > input {
         all: unset;
         width: 100%;
         color: var(--clr-neutral-600);
         text-align: end;
+    }
+
+
+    &:focus-within {
+        outline: 2px solid var(--clr-primary-400);
     }
 
 
@@ -198,15 +268,32 @@ form {
 
 
 .tip-calculator {
-    width: 100%;
+    --_gap: 2rem;
     border-radius: 25px;
     padding: 2rem;
+
+    @media (width <= 40rem) {
+        grid-column: full-width;
+    }
+}
+
+
+.tip-calculator__input-part {
+    /* set gap between label and input container */
+    > div:has(input) {
+        display: grid;
+        row-gap: 6px;
+    }
 }
 
 
 .tip-calculator__input-part > fieldset {
     all: unset;
     width: 100%;
+
+    legend {
+        margin-bottom: 1rem;
+    }
 }
 
 
@@ -232,8 +319,14 @@ form {
         &:not([data-custom-tip]):hover,
         &:not([data-custom-tip]):focus-within {
             --tip-color: var(--clr-neutral-600);
-            --tip-background: var(--clr-primary-400);
+            --tip-background: color-mix(in hsl, var(--clr-primary-400) 100%, white 50%);
         }
+        
+
+        &:not([data-custom-tip]):has(:checked) {
+            --tip-color: var(--clr-neutral-600);
+            --tip-background: var(--clr-primary-400);
+        }   
     }
 
 
@@ -277,9 +370,18 @@ form {
 
 .tip-results {
     display: grid;
-    row-gap: clamp(2rem, 2vw, 8.313rem);
+    row-gap: var(--row-gap, 2rem);
     border-radius: 15px;
     padding: 2.313rem 1.5rem;
+
+    @media (width >= 40rem) {
+        --row-gap: 8.313rem;
+    }
+}
+
+
+.tips-results__sums {
+    --_gap: 1.25rem;
 }
 
 
@@ -288,7 +390,7 @@ form {
     justify-content: space-between;
     align-items: center;
 
-    & h2::after {
+    h2::after {
         content: "/ person";
         display: block;
         font-size: var(--fs-100);
@@ -302,6 +404,12 @@ form {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background-color: color-mix(in hsl, var(--clr-primary-400) 100%, white 40%);
+    }
+
 
     &:disabled {
         color: var(--clr-neutral-600);
