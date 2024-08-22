@@ -5,7 +5,7 @@ import logo from "./assets/images/logo.svg";
 export default function App() {
   return (
     <>
-      <img src={logo} alt="logo" />
+      <img class="logo" src={logo} alt="logo" />
       <TipCalculator />
     </>
   )
