@@ -1,13 +1,21 @@
+import { useContext, useRef } from "react"
 
 
-export default function InputField({labelText, inputType}) {
+export default function InputField({ labelText, inputIcon, value, action, dispatch}) {
+
   return (
     <div>
-        <label className="clr-label" htmlFor={labelText.toLowerCase()}> {labelText} </label>
+      <label className="clr-label" htmlFor={labelText.toLowerCase()}> {labelText} </label>
 
-        <div className="input-container fs-large" data-input-icon={inputType}>
-            <input id={labelText.toLowerCase()} type="number"/>
-        </div>
+      <div className={`input-container ${value === "0" ? "input-container--error" : ""} fs-large`} data-input-icon={inputIcon}>
+        <input
+          id={labelText.toLowerCase()}
+          type="number"
+          min="0"
+          value={value}
+          onChange={(e) => dispatch({type: action, payload: e.target.value})}
+        />
+      </div>
     </div>
   )
 }
