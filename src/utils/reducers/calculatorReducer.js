@@ -3,7 +3,8 @@ import { act } from "react"
 export const CALC_INITIAL_STATE = {
     bill: "",
     people: "",
-    percentage: 0,
+    currentPercentage: 0,
+    isCustomTip: false,
     formValid: false
 }
 
@@ -22,17 +23,23 @@ export default function calculatorReducer(state, action) {
                 people: action.payload
             }
 
-        case "set tip percentage":
+        case "set current tip percentage":
             return {
                 ...state,
-                percentage: action.payload
+                currentPercentage: action.payload
+            }
+        
+        case "set is custom tip":
+            return {
+                ...state,
+                isCustomTip: !!action.payload,
             }
 
         case "reset states": 
             return {
                 bill: "",
                 people: "",
-                percentage: 0
+                currentPercentage: 0
             }
 
         case "set form valid":
