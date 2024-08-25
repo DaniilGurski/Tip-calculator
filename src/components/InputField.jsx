@@ -1,7 +1,9 @@
-import { useContext, useRef } from "react"
+import { useContext } from "react"
+import { calculatorContext } from "../utils/calculatorContext"
 
 
-export default function InputField({ labelText, inputIcon, value, action, dispatch}) {
+export default function InputField({ labelText, inputIcon, value, action}) {
+  const { dispatch } = useContext(calculatorContext);
 
   return (
     <div>

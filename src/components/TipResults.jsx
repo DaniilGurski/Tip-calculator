@@ -1,14 +1,22 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { CALC_ACTIONS } from "../utils/calculatorActions";
+import { calculatorContext } from "../utils/calculatorContext";
 
 
-export default function TipResults({ billValue, peopleCount, tipPercentage, isValidInput }) {
+export default function TipResults() {
+  const { form, dispatch } = useContext(calculatorContext); 
+  let { bill, people, currentPercentage, formValid} = form;
+
   let tipAmount = "0.00$";
   let totalPerPerson = "0.00$";
 
-  if (isValidInput) {
-    const tip = billValue * (tipPercentage / 100);
-    tipAmount = `${(tip / peopleCount).toFixed(2)}$`;
-    totalPerPerson = `${((parseInt(billValue) + tip) / peopleCount).toFixed(2)}$`;
+  if (formValid) {
+    bill = parseInt(bill);
+    people = parseInt(people);
+    const tip = bill * (currentPercentage / 100);
+    
+    tipAmount = `${(tip / people).toFixed(2)}$`;
+    totalPerPerson = `${((bill + tip) / people).toFixed(2)}$`;
   }
 
   return (
@@ -24,13 +32,9 @@ export default function TipResults({ billValue, peopleCount, tipPercentage, isVa
         </li>
 
       </ul>
-      <button className="tip-results__reset bg-accent clr-dark-cyan fs-large"> RESET </button>
+      <button className="tip-results__reset bg-accent clr-dark-cyan fs-large" onClick={() => {
+        dispatch({type: CALC_ACTIONS.RESET_STATES})
+      }}> RESET </button>
     </div>
   )
 }
-
-/* 
-Tip: dollar * (percentage / 100)
-Tip amount per person: Tip / peopleCount
-Total per person: (dollar + Tip) / peopleCount
-*/

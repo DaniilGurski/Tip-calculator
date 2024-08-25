@@ -1,66 +1,51 @@
 import { useEffect, useReducer, useState } from "react";
 import { CALC_ACTIONS } from "../utils/calculatorActions";
 import calculatorReducer, { CALC_INITIAL_STATE } from "../utils/reducers/calculatorReducer";
+import { calculatorContext } from "../utils/calculatorContext";
 
 import InputField from "./InputField";
 import TipPercentage from "./TipPercentage";
 import TipResults from "./TipResults";
+import TipPercentageSection from "./TipPercentageSection";
+
 
 
 export default function TipCalculator() {
-  /* refactor to reducer */ 
   const [form, dispatch] = useReducer(calculatorReducer, CALC_INITIAL_STATE)
 
-  useEffect(() => console.log(form), [form])
+  /* form validation (not allowing empty strings or zeros) */
   useEffect(() => {
-    dispatch({type: CALC_ACTIONS.SET_FORM_VALID, payload: !!(form.bill && form.people)})
+    const invalidInputs = ["", "0"]
+    const isFormValid = (!invalidInputs.includes(form.bill) && !invalidInputs.includes(form.people));
+    dispatch({type: CALC_ACTIONS.SET_FORM_VALID, payload: isFormValid})
   }, [form.bill, form.people])
 
-  
+  useEffect(() => console.log(form), [form])
   return (
     <div className="tip-calculator bg-white">
-      <form className="grid">
-        <div className="tip-calculator__input-part">
-          <InputField 
-          labelText={"Bill"} 
-          inputIcon={"dollar"} 
-          value={form.bill}
-          action={CALC_ACTIONS.SET_BILL_VALUE}
-          dispatch={dispatch} />
+      <calculatorContext.Provider value={{form, dispatch}}> 
+        <form className="grid" onSubmit={(e) => e.preventDefault()}>
+          <div className="tip-calculator__input-part">
+            <InputField 
+            labelText={"Bill"} 
+            inputIcon={"dollar"}
+            value={form.bill}
+            action={CALC_ACTIONS.SET_BILL_VALUE}
+            />
 
-          <fieldset>
-            <legend className="clr-label"> Select Tip % </legend>
+            <TipPercentageSection /> 
 
-            <ul className="tip-calculator__tip-percentages" role="listbox">
-              <li role="option"> <TipPercentage percentage={5}  dispatch={dispatch} isCustomSet={form.isCustomTip} currentPercentage={form.currentPercentage}/> </li>
-              <li role="option"> <TipPercentage percentage={10} dispatch={dispatch} isCustomSet={form.isCustomTip} currentPercentage={form.currentPercentage}/> </li>
-              <li role="option"> <TipPercentage percentage={15} dispatch={dispatch} isCustomSet={form.isCustomTip} currentPercentage={form.currentPercentage}/> </li>
-              <li role="option"> <TipPercentage percentage={25} dispatch={dispatch} isCustomSet={form.isCustomTip} currentPercentage={form.currentPercentage}/> </li>
-              <li role="option"> <TipPercentage percentage={50} dispatch={dispatch} isCustomSet={form.isCustomTip} currentPercentage={form.currentPercentage}/> </li>
-              <li data-custom-tip role="option">
-                <input 
-                type="number" 
-                name="tip-percentage" 
-                placeholder="Custom"
-                onChange={(e) => dispatch({type: CALC_ACTIONS.SET_IS_CUSTOM_TIP, payload: e.target.value})} />
-              </li>
-            </ul>
-          </fieldset>
+            <InputField 
+            labelText={"People"} 
+            inputIcon={"person"} 
+            value={form.people}
+            action={CALC_ACTIONS.SET_PEOPLE_COUNT}
+            />
 
-          <InputField 
-          labelText={"People"} 
-          inputIcon={"person"} 
-          value={form.people}
-          action={CALC_ACTIONS.SET_PEOPLE_COUNT}
-          dispatch={dispatch} />
-
-        </div>
-        <TipResults 
-        billValue={form.bill} 
-        peopleCount={form.people} 
-        tipPercentage={15}
-        isValidInput={form.formValid} />
-      </form> 
+          </div>
+          <TipResults />
+        </form> 
+      </calculatorContext.Provider>
     </div>
   )
 }
