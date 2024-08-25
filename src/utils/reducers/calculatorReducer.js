@@ -29,9 +29,10 @@ export default function calculatorReducer(state, action) {
                 currentPercentage: action.payload
             }
         
-        case "set is custom tip":
+        case "set custom tip":
             return {
                 ...state,
+                currentPercentage: action.payload,
                 isCustomTip: !!action.payload,
             }
 
