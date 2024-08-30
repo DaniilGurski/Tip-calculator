@@ -64,7 +64,6 @@ describe("App", () => {
         fireEvent.change(customTipInput, { target: { value: "60" } })
         expect(tipAmount.textContent).toBe("17.04$")
         expect(totalTipAmount.textContent).toBe("45.44$")
-        
     })
 
 
