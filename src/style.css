@@ -168,6 +168,13 @@ body {
 }
 
 
+main {
+    display: grid;
+    row-gap: var(--_row-gap, 2.5rem);
+    justify-items: center;
+}
+
+
 .container {
     display: grid;
     justify-items: center;

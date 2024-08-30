@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import { CALC_ACTIONS } from "../utils/calculatorActions";
 import { calculatorContext } from "../utils/calculatorContext";
 
@@ -12,6 +12,7 @@ export default function TipPercentage({ percentage }) {
         <input
         type="radio" 
         name="tip-percentage" 
+        role="option"
         checked={!isCustomTip && percentage === currentPercentage}
         id={`tip-${percentage}`}
         onChange={() => dispatch({type: CALC_ACTIONS.SET_TIP_PERCENTAGE, payload: percentage})} 

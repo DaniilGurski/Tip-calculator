@@ -14,7 +14,7 @@ export default function TipPercentageSection() {
             <ul className="tip-calculator__tip-percentages" role="listbox">
                 {
                     percentages.map(percentage => {
-                        return <li role="option" key={percentage}> <TipPercentage percentage={percentage}/> </li>
+                        return <li key={percentage}> <TipPercentage percentage={percentage}/> </li>
                     })
                 }
                 <li data-custom-tip role="option">

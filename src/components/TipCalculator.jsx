@@ -23,7 +23,7 @@ export default function TipCalculator() {
   useEffect(() => console.log(form), [form])
   
   return (
-    <main className="tip-calculator bg-white">
+    <div className="tip-calculator bg-white">
       <calculatorContext.Provider value={{form, dispatch}}> 
         <form className="grid" onSubmit={(e) => e.preventDefault()}>
           <div className="tip-calculator__input-part">
@@ -47,6 +47,6 @@ export default function TipCalculator() {
           <TipResults />
         </form> 
       </calculatorContext.Provider>
-    </main>
+    </div>
   )
 }
