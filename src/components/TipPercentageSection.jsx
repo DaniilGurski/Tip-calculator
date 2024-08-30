@@ -11,7 +11,7 @@ export default function TipPercentageSection() {
         <fieldset>
             <legend className="clr-label"> Select Tip % </legend>
 
-            <ul className="tip-calculator__tip-percentages">
+            <ul className="tip-calculator__tip-percentages" role="list">
                 {
                     percentages.map(percentage => {
                         return <li key={percentage}> <TipPercentage percentage={percentage}/> </li>
