@@ -12,7 +12,6 @@ export default function TipPercentage({ percentage }) {
         <input
         type="radio" 
         name="tip-percentage" 
-        role="option"
         checked={!isCustomTip && percentage === currentPercentage}
         id={`tip-${percentage}`}
         onChange={() => dispatch({type: CALC_ACTIONS.SET_TIP_PERCENTAGE, payload: percentage})} 
