@@ -148,6 +148,17 @@ select {
 .even-columns { display: grid; grid-template-columns: repeat(var(--column-count, 2), 1fr); }
 
 
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+
 /* general */
 
 body {
