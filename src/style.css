@@ -258,21 +258,6 @@ form {
     }
 
 
-    /* &:has([value="0"]) {
-        --input-outline-color: var(--clr-primary-500); 
-
-        &::before {
-            content: "Can't be zero";
-            position: absolute;
-            right: 0;
-            bottom: 100%;
-
-            font-size: var(--fs-200);
-            color: var(--input-outline-color);
-        }
-    } */
-
-
     &[data-input-icon="dollar"]::before {
         content: url("./assets/images/icon-dollar.svg");
     }
@@ -287,16 +272,14 @@ form {
 .input-container--error,
 .input-container--error:focus-within {
     --input-outline-color: var(--clr-primary-500); 
+}
 
-    &::after {
-        content: "Can't be zero";
-        position: absolute;
-        right: 0;
-        bottom: 100%;
 
-        font-size: var(--fs-200);
-        color: var(--input-outline-color);
-    }
+/* error message wrapper */
+.input-container__error {
+    position: absolute;
+    right: 0;
+    bottom: 100%
 }
 
 
