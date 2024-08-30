@@ -17,7 +17,7 @@ export default function TipPercentageSection() {
                         return <li key={percentage}> <TipPercentage percentage={percentage}/> </li>
                     })
                 }
-                <li data-custom-tip role="option">
+                <li data-custom-tip>
                     <input
                     type="number"
                     name="tip-percentage"
