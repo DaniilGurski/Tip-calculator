@@ -27,6 +27,7 @@ export default function TipResults() {
       onClick={() => {
         dispatch({type: CALC_ACTIONS.RESET_STATES})
       }}
+      type="submit"
       aria-label="reset calculator"> RESET </button>
     </div>
   )

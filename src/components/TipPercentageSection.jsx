@@ -22,6 +22,7 @@ export default function TipPercentageSection() {
                     type="number"
                     name="tip-percentage"
                     placeholder="Custom"
+                    aria-label="custom tip"
                     value={currentPercentage}
                     onChange={(e) => {
                         dispatch({ type: CALC_ACTIONS.SET_CUSTOM_TIP, payload: e.target.value })
