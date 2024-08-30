@@ -4,7 +4,7 @@ import { CALC_ACTIONS } from "../utils/calculatorActions";
 import TipPercentage from "./TipPercentage";
 
 export default function TipPercentageSection() {
-    const { form, dispatch, currentPercentage } = useContext(calculatorContext);
+    const { dispatch, currentPercentage } = useContext(calculatorContext);
     const percentages = [5, 10, 15, 25, 50];
 
     return (
@@ -17,6 +17,7 @@ export default function TipPercentageSection() {
                         return <li key={percentage}> <TipPercentage percentage={percentage}/> </li>
                     })
                 }
+
                 <li data-custom-tip>
                     <input
                     type="number"

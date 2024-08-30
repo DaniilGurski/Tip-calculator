@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { CALC_ACTIONS } from "../utils/calculatorActions";
 import { calculatorContext } from "../utils/calculatorContext";
 import { calculateTip } from "../utils/helpers";

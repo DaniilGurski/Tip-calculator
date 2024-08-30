@@ -4,7 +4,6 @@ import calculatorReducer, { CALC_INITIAL_STATE } from "../utils/reducers/calcula
 import { calculatorContext } from "../utils/calculatorContext";
 
 import InputField from "./InputField";
-import TipPercentage from "./TipPercentage";
 import TipResults from "./TipResults";
 import TipPercentageSection from "./TipPercentageSection";
 
