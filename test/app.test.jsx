@@ -5,7 +5,6 @@ import * as helpers from "/src/utils/helpers";
 vi.spyOn(helpers, "calculateTip");
 
 describe("App", () => {
-
     it("displays an error message when the bill or people input is zero", async () => {
         render(<App />)
 
@@ -19,7 +18,7 @@ describe("App", () => {
         expect(screen.getAllByText(errorMessage)).toHaveLength(2)
     })
 
-    
+
     it("calls calculateTip when a radio button is clicked", async () => {
         render(<App />)
 
@@ -34,7 +33,7 @@ describe("App", () => {
         expect(helpers.calculateTip).toHaveBeenCalledWith(true, "123", "123", 5)
     })
 
-    
+
     it("displays tip calculations correctly", async () => {
         const { container } = render(<App />)
 
