@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { calculatorContext } from "../utils/calculatorContext";
+import { CALC_ACTIONS } from "../utils/calculatorActions";
 import TipPercentage from "./TipPercentage";
 
 export default function TipPercentageSection() {
-    const { form, dispatch } = useContext(calculatorContext);
-    const { isCustomTip, currentPercentage} = form;
+    const { form, dispatch, currentPercentage } = useContext(calculatorContext);
     const percentages = [5, 10, 15, 25, 50];
 
     return (
@@ -22,6 +22,7 @@ export default function TipPercentageSection() {
                     type="number"
                     name="tip-percentage"
                     placeholder="Custom"
+                    value={currentPercentage}
                     onChange={(e) => {
                         dispatch({ type: CALC_ACTIONS.SET_CUSTOM_TIP, payload: e.target.value })
                     }}
